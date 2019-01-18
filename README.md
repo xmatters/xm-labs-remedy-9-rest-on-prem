@@ -167,7 +167,7 @@ The following steps will guide you in adding this library:
      And modify the file so that it now looks like this:
     
       ```
-      export CP=/opt/xmatters/xa/bin/xa.jar:/opt/xmatters/xa/bin/EncryptionUtil.jar
+      export CP=/opt/xmatters/xa/bin/xa.jar:/opt/xmatters/xa/bin/EncryptionUtils.jar
       export DL=-Dloader.main=com.xmatters.XAgentApplication
       ${SPRINGBOOT_JAVA} -cp ${CP} ${DL} org.springframework.boot.loader.JarLauncher
       ```
