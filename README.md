@@ -65,7 +65,7 @@ Notify on-call response teams when critical incidents are reported in Remedy. Wi
 The following are the files that makeup the Remedy 9 Incident integration.  Each of these are installed and configured into a combination of Remedy, the xMatters Agent, and your xMatters On-Demand instance.  The [Installation](#inst) section covers this in detail.
 
 * [xMattersAgent.zip](xMattersAgent.zip) - Supplemental files for completing the xMatters Agent configuration.
-* [xMattersOnDemand/BMCRemedyITSMIncidentREST611.zip](xMattersOnDemand/BMCRemedyITSMIncidentREST611.zip) - Remedy Incident Communication Plan (ready to be configured).
+* [xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip](xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip) - Remedy Incident Communication Plan (ready to be configured).
 * [Remedy.zip](Remedy.zip) - This zip file containing the BMC Remedy 8.1 and above workflow definition files used to integrate changes to the Incident by the integration with xMatters.
 
 # <a name="how"></a>3. How it works
