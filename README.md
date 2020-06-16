@@ -4,7 +4,9 @@ Notify on-call response teams when critical incidents are reported in Remedy. Wi
 ---------
 
 <kbd>
-  <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
+<a href="https://support.xmatters.com/hc/en-us/community/topics">
+   <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
+</a>
 </kbd>
 
 ---------
@@ -18,9 +20,9 @@ Notify on-call response teams when critical incidents are reported in Remedy. Wi
    2. [xMatters Agent Additional Setup](#xaset)
    3. [Create the xMatters Integration and Remedy Users](#ciru)
    4. [xMatters On-Demand Setup (Part 1)](#xset1)
-      1. [Import the Communication Plan](#icp)
-      2. [Assign permissions to the Communication Plan and Form](#apcpf)
-	   3. [Get the Inbound Integration webhook URL](#giiw)
+      1. [Import the Workflow](#icp)
+      2. [Assign permissions to the Workflow and Form](#apcpf)
+      3. [Get the Inbound Integration webhook URL](#giiw)
       4. [Encrypt the Remedy User password](#iris2)
    6. [xMatters On-Demand Setup (Part 2)](#xset2)
       1. [Enable Outbound Integrations](#eoi)
@@ -65,7 +67,7 @@ Notify on-call response teams when critical incidents are reported in Remedy. Wi
 The following are the files that makeup the Remedy 9 Incident integration.  Each of these are installed and configured into a combination of Remedy, the xMatters Agent, and your xMatters On-Demand instance.  The [Installation](#inst) section covers this in detail.
 
 * [xMattersAgent.zip](xMattersAgent.zip) - Supplemental files for completing the xMatters Agent configuration.
-* [xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip](xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip) - Remedy Incident Communication Plan (ready to be configured).
+* [xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip](xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip) - Remedy Incident Workflow (ready to be configured).
 * [Remedy.zip](Remedy.zip) - This zip file containing the BMC Remedy 8.1 and above workflow definition files used to integrate changes to the Incident by the integration with xMatters.
 
 # <a name="how"></a>3. How it works
@@ -101,7 +103,7 @@ Before doing any installation steps for this Remedy Incident integration, it is 
 To view the state of the running agents:
 
    * Login to your xMatters instance
-   * Go to the `DEVELOPER` section
+   * Go to the Workflows page
    * On the left hand context menu, click on `Agents` (directly underneath `XMATTERS AGENTS`)
    * The default view on the right is called `AVAILABLE`, you need to click on the next link `INSTALLED`
       <details><summary>Click here to see an example</summary><img src="media/xMViewAgents1.png"></details>
@@ -188,7 +190,7 @@ The following steps will guide you in adding this library:
 
 
 ## <a name="ciru"></a>Create the xMatters Integration and Remedy Users
-Prior to installing and configuring the xMatters Communication Plan and Remedy Integration files, it is best to create the xMatters Integration User that the Inbound and Outbound Integrations will use to authenticate back to xMatters.  And, the Remedy `Person` that the xMatters Integration will use to make REST calls into Remedy.
+Prior to installing and configuring the xMatters Workflow and Remedy Integration files, it is best to create the xMatters Integration User that the Inbound and Outbound Integrations will use to authenticate back to xMatters.  And, the Remedy `Person` that the xMatters Integration will use to make REST calls into Remedy.
 
 ### <a name="crest"></a>Create an xMatters REST user account
 Note, that this account needs to have two roles:
@@ -196,7 +198,7 @@ Note, that this account needs to have two roles:
 * REST Web Service User, and
 * Developer
 
-These are required as the integration makes callbacks into xMatters to initiate and control Events (requiring the "REST Web Service User" Role), and that interrogate the Communiation Plan directly (requiring the "Developer" role).
+These are required as the integration makes callbacks into xMatters to initiate and control Events (requiring the "REST Web Service User" Role), and that interrogate the Workflow directly (requiring the "Developer" role).
 
 <kbd>
   <img src="media/xMRESTUser.png">
@@ -211,21 +213,21 @@ First, create a new ITSM user with the Incident Master role in BMC Remedy; the u
 </kbd>
 
 ## <a name="xset1"></a>xMatters Setup (Part 1)
-### <a name="icp"></a>Import the Communication Plan
-* Import the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan [BMCRemedyITSMIncidentREST.zip](BMCRemedyITSMIncidentREST.zip).
-Instructions on Importing Communication Plans are [here](http://help.xmatters.com/OnDemand/xmodwelcome/communicationplanbuilder/exportcommplan.htm).
+### <a name="icp"></a>Import the Workflow
+* Import the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow [BMCRemedyITSMIncidentREST.zip](BMCRemedyITSMIncidentREST.zip).
+Instructions on Importing Workflow are [here](http://help.xmatters.com/OnDemand/xmodwelcome/communicationplanbuilder/exportcommplan.htm).
 
-### <a name="apcpf"></a>Assign permissions to the Communication Plan and Form  
-* On the Communication Plans page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan then select Access Permissions
+### <a name="apcpf"></a>Assign permissions to the Workflow and Form  
+* On the Workflow page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow then select Access Permissions
 * Add the REST User
-* On the Communication Plans page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan then select Forms
+* On the Workflow page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow then select Forms
 * Click the Mobile and Web Service drop-down menu for the Incident Alerts form
 * Select Sender Permissions then add the REST User
 
 ### <a name="giiw"></a>Get the Inbound Integration webhook URL
 Before we can install and configure the Remedy Integration Service into the xMatters Integration Agent, we also need to collect the URL (Webhook address) for the Inbound Integration that is called on behalf of Remedy when an Incident requires xMatters to notify folks.
 
-* On the Communication Plans page, click the Edit drop-down menu for the "**BMC Remedy ITSM - Incident - REST - v6.1.1**" communication plan then select Integration Builder
+* On the Workflow page, click the Edit drop-down menu for the "**BMC Remedy ITSM - Incident - REST - v6.1.1**" Workflow then select Integration Builder
    <details><summary>Click here for an example</summary>
    <img alt="Integration Builder" src="media/xMOpenIntegrationBuilder.png">
    </details>
@@ -298,11 +300,11 @@ This integration includes a utility that is required to encrypt the password tha
 
 ## <a name="xset2"></a>xMatters Setup (Part 2)
 ### <a name="eoi"></a>Enable Outbound Integrations
-As was seen with the Inbound Integration, when you first load a Communication Plan that has Outbound Integrations configured to use the xMatters Agent, those Outbound Integrations come up as disabled.  This is because you have to tell xMatters On-Demand, which xMatters Agent (or Agents) you would like those Outbound Integrations to run on.
+As was seen with the Inbound Integration, when you first load a Workflow that has Outbound Integrations configured to use the xMatters Agent, those Outbound Integrations come up as disabled.  This is because you have to tell xMatters On-Demand, which xMatters Agent (or Agents) you would like those Outbound Integrations to run on.
 
 Here is how to Enable an Outbound Integration, and point it to a specific xMatters Agent.<br>**Note: You will need to perform the following steps for each of the 8 Outbound Integrations.**
 
-* On the Communication Plans page, click the Edit drop-down menu for the "**BMC Remedy ITSM - Incident - REST - v6.1.1**" communication plan then select Integration Builder
+* On the Workflow page, click the Edit drop-down menu for the "**BMC Remedy ITSM - Incident - REST - v6.1.1**" Workflow then select Integration Builder
    <details><summary>Click here for an example</summary>
    <img alt="Integration Builder" src="media/xMOpenIntegrationBuilder.png">
    </details>
@@ -344,7 +346,7 @@ Here is how to Enable an Outbound Integration, and point it to a specific xMatte
    </details>
 
 ### <a name="clpv"></a>Configure List Property Values  
-* On the Communication Plans page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan then select `Properties` from the sub-menu. 
+* On the Workflow page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow then select `Properties` from the sub-menu. 
 * Verify/Edit the following list of Property values:  
    * Company  
    * Contact\_Sensitivity  
@@ -360,34 +362,34 @@ Here is how to Enable an Outbound Integration, and point it to a specific xMatte
    * VIP
 
 ### <a name="cibe"></a>Configure Integration Builder Endpoints  
-* On the Communication Plans page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan then select Integration Builder
+* On the Workflow page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow then select Integration Builder
 * Click the "Edit Endpoints" button
 * For the `xMatters` endpoint, in Assign Endpoint add the REST User from above (e.g. svc-rest-remedy-incident), then Save Changes
 * For the `RemedyRESTAPI` endpoint, type the Base URL for the Remedy environment's REST Web Service address (e.g. https://remedyServer:8443), then Save Changes.<br>NOTE: This address needs to be reachable by the xMatters Agent.
 * Close Edit Endpoints  
 
 ### <a name="cibc1"></a>Configure Integration Builder Constants
-Note: There are many Constants defined in the Communication Plan (and described below), but only the ones that are environment specific need to be configured.  Those will have an asterisk (*) in front of their name.
+Note: There are many Constants defined in the Workflow (and described below), but only the ones that are environment specific need to be configured.  Those will have an asterisk (*) in front of their name.
 
-* On the Communication Plans page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan then select Integration Builder
+* On the Workflow page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow then select Integration Builder
 * Click the "Edit Constants" button
-* Edit these constants to match your environment (used by the scripts in the Communication Plan, and the "Remedy Rest Util" Shared Library)
+* Edit these constants to match your environment (used by the scripts in the Workflow, and the "Remedy Rest Util" Shared Library)
    
 | Constant               | Description                                                                |
 |:---------------------- |:-------------------------------------------------------------------------- |
 | `* REMEDY_FORM_CRITERIA` | JSON Array containing objects with property values that when matched cause a particular form to be used. (This object is dependent on the constant `REMEDY_FORM_INFO`.  See specific configuration instructions for both below). |
-| `* REMEDY_FORM_INFO` | JSON Object representing the FORMs in this Communication Plan, their name and trigger URL. (This values in this object are used by the constant `REMEDY_FORM_CRITERIA`.  See specific configuration instructions for both below). |
+| `* REMEDY_FORM_INFO` | JSON Object representing the FORMs in this Workflow, their name and trigger URL. (This values in this object are used by the constant `REMEDY_FORM_CRITERIA`.  See specific configuration instructions for both below). |
 | `* REMEDY_FQDN` | The fully qualified domain name AND port of the Remedy Mid Tier server that provides the Remedy Web User Interface.  Typically this is on port 8080. |
 | `* REMEDY_SERVER_NAME` | The logical server name to target in Remedy. |
 | `* REMEDY_WS_PASSWORD` | The Remedy API user's encrypted password.<br>Note: This is created using the iapassword.bat / iapassword.sh utility (originally from the xMatters Integration Agent.  See the instruction [here](https://help.xmatters.com/ondemand/iaguide/iapasswordutility.htm).  Once the file is created, open it up in any text editor and paste the contents into this value. |
 | `* REMEDY_WS_USERNAME` | Login ID of the Remedy User that will be making API calls. (The default is "xmatters".) |
 
 ### <a name="cibc2"></a>Review the Default Integration Builder Constants
-Note: There are many Constants defined in the Communication Plan (and described below), but only the ones that are environment specific need to be configured.  Those will have an asterisk (*) in front of their name.
+Note: There are many Constants defined in the Workflow (and described below), but only the ones that are environment specific need to be configured.  Those will have an asterisk (*) in front of their name.
 
-* On the Communication Plans page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Communication Plan then select Integration Builder
+* On the Workflow page, click the Edit drop-down menu for the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow then select Integration Builder
 * Click the "Edit Constants" button
-* Review these constants used by the scripts in the Communication Plan, and the "Remedy Rest Util" Shared Library.  They all have default values that are suitable for getting started.
+* Review these constants used by the scripts in the Workflow, and the "Remedy Rest Util" Shared Library.  They all have default values that are suitable for getting started.
    
 | Constant               | Description                                                                |
 |:---------------------- |:-------------------------------------------------------------------------- |
@@ -452,7 +454,7 @@ The value to put into `"URLUser"` is simply the xMatters User ID for the REST Us
 
 Here is how we lookup the values to put into the "triggerURL":
 
-* On the Communication Plans page, click the Edit drop-down menu for the "**BMC Remedy ITSM - Incident - REST - v6.1.1**" communication plan then select Integration Builder
+* On the Workflow page, click the Edit drop-down menu for the "**BMC Remedy ITSM - Incident - REST - v6.1.1**" Workflow then select Integration Builder
    <details><summary>Click here for an example</summary>
    <img alt="Integration Builder" src="media/xMOpenIntegrationBuilder.png">
    </details>
@@ -523,14 +525,14 @@ You do not have to modify `REMEDY_FORM_CRITERIA` if the out-of-the-box behavior 
 
 The default configuration operates as follows:
 
-	* If the values from Remedy for
-   		* `"impact"` is `"1-Extensive/Widespread"`, and 
-    	* `"urgency"` is `"1-Critical"`, and 
-    	* `"priority"` is `"Critical"`
-    	
-	* Then, initiate "Incident Alerts with Bridge" Form, and start a new xMatters Conference Bridge.
-	
-	* All other combinations will result in the non-bridge "Incident Alerts" Form.
+   * If the values from Remedy for
+         * `"impact"` is `"1-Extensive/Widespread"`, and 
+      * `"urgency"` is `"1-Critical"`, and 
+      * `"priority"` is `"Critical"`
+      
+   * Then, initiate "Incident Alerts with Bridge" Form, and start a new xMatters Conference Bridge.
+   
+   * All other combinations will result in the non-bridge "Incident Alerts" Form.
 
 Here is what the out-of-the-box contents of `REMEDY_FORM_CRITERIA` looks like:
 
@@ -653,7 +655,7 @@ Here's another way of thinking about how and when to specify the Conference Brid
                     existingEventValueFieldName: {string} "<field-name-in-source-properties-with-existingEventPropFieldName-value>"
 ```
 
-	
+   
 ## <a name="rsu"></a>Remedy Setup
 Configuring BMC Remedy to integrate with xMatters requires the following steps:
 
