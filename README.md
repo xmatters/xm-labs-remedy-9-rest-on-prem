@@ -214,7 +214,7 @@ First, create a new ITSM user with the Incident Master role in BMC Remedy; the u
 
 ## <a name="xset1"></a>xMatters Setup (Part 1)
 ### <a name="icp"></a>Import the Workflow
-* Import the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow [BMCRemedyITSMIncidentREST.zip](BMCRemedyITSMIncidentREST.zip).
+* Import the "BMC Remedy ITSM - Incident - REST - v6.1.1" Workflow [BMCRemedyITSMIncidentRESTv611.zip](/xMattersOnDemand/BMCRemedyITSMIncidentRESTv611.zip).
 Instructions on Importing Workflow are [here](http://help.xmatters.com/OnDemand/xmodwelcome/communicationplanbuilder/exportcommplan.htm).
 
 ### <a name="apcpf"></a>Assign permissions to the Workflow and Form  
